@@ -1,5 +1,4 @@
 from analyzer.ai_suggestions import get_optimization_suggestions
-from analyzer.code_analysis import analyze_code
 from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
@@ -11,19 +10,23 @@ def index():
         if not submitted_code:
             return jsonify({"error": "No code provided"}), 400
 
-        # Analyze the code
-        analysis = analyze_code(submitted_code)
-
         # Get AI-based suggestions
-        suggestions = get_optimization_suggestions(submitted_code)
+        try:
+            suggestions = get_optimization_suggestions(submitted_code)
+        except Exception as e:
+            return jsonify({"error": str(e)})
+    else:
+        return jsonify(suggestions)
 
-        # Combine results
-        result = {"analysis": analysis, "suggestions": suggestions}
-        return jsonify(result)
+        
 
     return render_template("index.html")
 
 if __name__ == "__main__":
     import os
-    os.environ["API_KEY"] = "AIzaSyClCyMoI5M4Q5E9fOUDOcUSdZ_IGztUfS8cle"
+    api_key = os.getenv("API_KEY")
+    if not api_key:
+        raise EnvironmentError("API_KEY environment variable not set")
     app.run(debug=True)
+    debug_mode = os.getenv("FLASK_DEBUG", "False").lower() in ["true", "1", "t"]
+    app.run(debug=debug_mode)
