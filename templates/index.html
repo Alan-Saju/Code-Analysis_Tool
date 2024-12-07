@@ -4,20 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles.css">
-    <title>Code Analyzer</title>
+    <title>AI Code Optimizer</title>
 </head>
 <body>
     <div class="container">
-        <h1>AI-Powered Code Analyzer</h1>
+        <div class="header">
+            <h1>AI Code Optimizer</h1>
+        </div>
         <form id="code-form">
-            <textarea name="code" id="code" placeholder="Paste your code here..."></textarea>
-            <button type="submit">Analyze</button>
+            <textarea 
+                name="code" 
+                id="code" 
+                placeholder="Paste your code here for AI-powered optimization suggestions..."
+            ></textarea>
+            <div class="submit-container">
+                <button type="submit">Analyze Code</button>
+            </div>
         </form>
         <div id="suggestions" style="display: none;">
-            <h3>Suggestions:</h3>
+            <h3>Optimization Insights</h3>
             <ul id="suggestions-list"></ul>
         </div>
     </div>
+
     <script>
     document.getElementById('code-form').addEventListener('submit', async function (event) {
         event.preventDefault();
@@ -25,7 +34,6 @@
         const suggestionsDiv = document.getElementById('suggestions');
         const suggestionsList = document.getElementById('suggestions-list');
         
-        // Reset previous results
         suggestionsList.innerHTML = '';
         suggestionsDiv.style.display = 'none';
 
@@ -35,7 +43,6 @@
         }
 
         try {
-            // Send the code to the server
             const response = await fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -55,12 +62,8 @@
                     suggestions.forEach(suggestion => {
                         const listItem = document.createElement('li');
                         
-                        // Bold for headings
                         if (suggestion.startsWith('**') && suggestion.endsWith('**')) {
                             listItem.innerHTML = `<strong>${suggestion.replace(/\*\*/g, '')}</strong>`;
-                            listItem.style.marginTop = '10px';
-                            listItem.style.color = '#333';
-                            listItem.style.fontSize = '1.1em';
                         } else {
                             listItem.textContent = suggestion;
                         }
@@ -69,13 +72,11 @@
                     });
                 }
                 
-                // Show suggestions
                 suggestionsDiv.style.display = 'block';
             } else {
-                // Handle error response
                 const errorItem = document.createElement('li');
                 errorItem.textContent = result.error || 'An error occurred.';
-                errorItem.style.color = 'red';
+                errorItem.style.color = '#ff6b6b';
                 suggestionsList.appendChild(errorItem);
                 suggestionsDiv.style.display = 'block';
             }
