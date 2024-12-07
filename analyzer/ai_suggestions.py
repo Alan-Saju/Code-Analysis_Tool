@@ -15,6 +15,7 @@ Evaluation Criteria: for code optimzation
 1. Correctness
 2. Code Quality
 3. Usage of typed parameters and typedefs
+4.If the code to analyze doesnot contain any code print "No code provided"
 
 For each section, provide:
 - Clear, concise points
