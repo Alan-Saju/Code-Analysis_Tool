@@ -20,7 +20,7 @@
     </div>
     <script>
     document.getElementById('code-form').addEventListener('submit', async function (event) {
-        event.preventDefault(); // Prevent the page from reloading
+        event.preventDefault();
         const code = document.getElementById('code').value;
         const suggestionsDiv = document.getElementById('suggestions');
         const suggestionsList = document.getElementById('suggestions-list');
@@ -54,7 +54,17 @@
                 } else {
                     suggestions.forEach(suggestion => {
                         const listItem = document.createElement('li');
-                        listItem.textContent = suggestion;
+                        
+                        // Bold for headings
+                        if (suggestion.startsWith('**') && suggestion.endsWith('**')) {
+                            listItem.innerHTML = `<strong>${suggestion.replace(/\*\*/g, '')}</strong>`;
+                            listItem.style.marginTop = '10px';
+                            listItem.style.color = '#333';
+                            listItem.style.fontSize = '1.1em';
+                        } else {
+                            listItem.textContent = suggestion;
+                        }
+                        
                         suggestionsList.appendChild(listItem);
                     });
                 }
