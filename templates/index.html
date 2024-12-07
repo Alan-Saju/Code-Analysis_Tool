@@ -3,14 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/styles.css">
     <title>Code Analyzer</title>
 </head>
 <body>
-    <h1>AI-Powered Code Analyzer</h1>
-    <form action="/" method="POST">
-        <textarea name="code" placeholder="Paste your code here..." rows="10" cols="50"></textarea>
-        <button type="submit">Analyze</button>
-    </form>
+    <div class="container">
+        <h1>AI-Powered Code Analyzer</h1>
+        <form id="code-form">
+            <textarea name="code" id="code" placeholder="Paste your code here..."></textarea>
+            <button type="submit">Analyze</button>
+        </form>
+        <div id="suggestions" style="display: none;">
+            <h3>Suggestions:</h3>
+            <ul id="suggestions-list"></ul>
+        </div>
+    </div>
+    <script>
+    document.getElementById('code-form').addEventListener('submit', async function (event) {
+        event.preventDefault(); // Prevent the page from reloading
+        const code = document.getElementById('code').value;
+        const suggestionsDiv = document.getElementById('suggestions');
+        const suggestionsList = document.getElementById('suggestions-list');
+        
+        // Reset previous results
+        suggestionsList.innerHTML = '';
+        suggestionsDiv.style.display = 'none';
+
+        if (!code) {
+            alert('Please enter code to analyze!');
+            return;
+        }
+
+        try {
+            // Send the code to the server
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                const suggestions = result.suggestions || [];
+                
+                if (suggestions.length === 0) {
+                    const noSuggestionItem = document.createElement('li');
+                    noSuggestionItem.textContent = 'No optimization suggestions found.';
+                    suggestionsList.appendChild(noSuggestionItem);
+                } else {
+                    suggestions.forEach(suggestion => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = suggestion;
+                        suggestionsList.appendChild(listItem);
+                    });
+                }
+                
+                // Show suggestions
+                suggestionsDiv.style.display = 'block';
+            } else {
+                // Handle error response
+                const errorItem = document.createElement('li');
+                errorItem.textContent = result.error || 'An error occurred.';
+                errorItem.style.color = 'red';
+                suggestionsList.appendChild(errorItem);
+                suggestionsDiv.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while analyzing the code.');
+        }
+    });
+    </script>
 </body>
 </html>
