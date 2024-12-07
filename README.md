@@ -14,7 +14,7 @@ An AI-powered tool that analyzes code snippets for performance bottlenecks and p
 ## Setup Instructions
 
 ### 1. Fork the Repository
-   - Navigate to the [AI-Code-Optimizer repository](https://github.com/your-username/AI-Code-Optimizer).
+   - Navigate to the [AI-Code-Optimizer repository](https://github.com/Alan-Saju/AI-Code-Optimizer).
    - Click on the "Fork" button in the upper right corner to create a copy of the repository in your GitHub account.
 
 ### 2. Create a Virtual Environment
@@ -69,7 +69,12 @@ An AI-powered tool that analyzes code snippets for performance bottlenecks and p
 ---
 
 ## Screenshots
-- Add relevant screenshots of your application to this section to help users understand its functionality.
+
+### AI Code Optimizer in Action
+
+![Home Page](screenshots/Screenshot from 2024-12-07 23-16-56.png)
+![Suggestions Block](screenshots/Screenshot from 2024-12-07 23-17-32.png)
+![Optimizations Block](screenshots/Screenshot from 2024-12-07 23-17-53.png)
 
 ---
 
