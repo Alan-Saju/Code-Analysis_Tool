@@ -69,7 +69,12 @@ An AI-powered tool that analyzes code snippets for performance bottlenecks and p
 ---
 
 ## Screenshots
-- Add relevant screenshots of your application to this section to help users understand its functionality.
+
+### AI Code Optimizer in Action
+
+![Home Page](images/screenshot1.png)
+![Suggestions Block](images/screenshot2.png)
+![Optimizations Block](images/screenshot3.png)
 
 ---
 
