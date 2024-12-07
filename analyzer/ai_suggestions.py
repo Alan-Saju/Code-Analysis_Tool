@@ -11,6 +11,10 @@ def get_optimization_suggestions(code: str) -> list:
 
 1. Identify potential performance bottlenecks
 2. Suggest specific optimizations
+Evaluation Criteria: for code optimzation
+1. Correctness
+2. Code Quality
+3. Usage of typed parameters and typedefs
 
 For each section, provide:
 - Clear, concise points
