@@ -81,7 +81,5 @@ An AI-powered tool that analyzes code snippets for performance bottlenecks and p
 ## License
 - This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## Acknowledgements
-- List any dependencies, libraries, or tools used in this project.
 
 Feel free to reach out if you have any questions or run into issues!
